@@ -1,6 +1,5 @@
 import numpy as np
 import librosa
-import librosa.display
 import matplotlib.pyplot as plt
 import cv2
 import soundfile as sf
@@ -26,6 +25,7 @@ def embed_image_in_spectrogram(audio_file, image_file, output_audio, scale_facto
     # Load and resize the image
     img = cv2.imread(image_file, cv2.IMREAD_GRAYSCALE)
     img = cv2.resize(img, img_size)
+    img = cv2.flip(img, 0)  # Flip vertically
 
     # Normalize image (scaled to reduce impact on sound)
     img_normalized = (img / 255.0) * np.max(magnitude) * scale_factor
